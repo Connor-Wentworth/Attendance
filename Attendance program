@@ -15,10 +15,16 @@ int main() {
 	int loop = 0; //loop variable
 	int fail; //for invalid inputs
 	int i, attendances; //temporary variable and attendance
-
-	cout << "Enter date as month-day-year\n"; //asks for date
-	cin >> date;
-	ofstream MyFile (date + ".txt"); //creates file name
+	int month, day, year;
+	cout << "Enter the month\n";
+	cin >> month;
+	cout << "Enter the day\n";
+	cin >> day;
+	cout << "Enter the year\n";
+	cin >> year;
+	
+    string filename = to_string(month) + "-" + to_string(day) + "-" + to_string(year) + ".txt";
+    ofstream MyFile(filename);
 
 	do {
 		i = 0;
