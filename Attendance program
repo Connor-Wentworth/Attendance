@@ -22,9 +22,9 @@ int main() {
 	cin >> day;
 	cout << "Enter the year\n";
 	cin >> year;
-	
-    string filename = to_string(month) + "-" + to_string(day) + "-" + to_string(year) + ".txt";
-    ofstream MyFile(filename);
+
+	string filename = to_string(month) + "-" + to_string(day) + "-" + to_string(year) + ".txt";
+	ofstream MyFile(filename);
 
 	do {
 		i = 0;
@@ -33,9 +33,12 @@ int main() {
 			i++;
 			for (string names: names) {
 				cout << names << " are they present, yes(1) no(2)\n"; //asks if student is present
-				cin >> attendances;
+				while (!(cin >> attendances)) {  // Keep asking until the user enters a valid number
+					cout << "Invalid input. Try again: ";
+					cin.clear(); // Reset input errors
+					cin.ignore(10000, '\n');
+				} // Remove bad input
 				if (attendances == 1) {
-
 					MyFile << names <<  ", attendance: present\n"; //1 = yes
 					attendance.push_back(", attendance: present\n");
 				}
@@ -43,7 +46,9 @@ int main() {
 					MyFile << names <<  ", attendance: absent\n"; //2 = no
 					attendance.push_back(", attendance: absent\n");
 				} else {
-					cout << "invalid input, try again\n"; //otherwise reloops
+					cout << "invalid input, try again: "; //otherwise reloops
+					cin >> attendances;
+					cout << "\n";
 					fail++;
 				}
 
@@ -51,7 +56,8 @@ int main() {
 
 			return 0;
 		}
-	} while (fail == 1); // resets on invalid input
+	}
+	while (fail == 1); // resets on invalid input
 
 	loop++;
 
