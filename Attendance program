@@ -2,6 +2,7 @@
 #include <string> //for string statments
 #include <fstream> //for creating file
 #include <vector> //for vectors
+#include <cctype>
 using namespace std;
 
 int main() {
@@ -15,17 +16,16 @@ int main() {
 	int loop = 0; //loop variable
 	int fail; //for invalid inputs
 	int i, attendances; //temporary variable and attendance
-	int month, day, year;
-	cout << "Enter the month\n";
-	cin >> month;
-	cout << "Enter the day\n";
-	cin >> day;
-	cout << "Enter the year\n";
-	cin >> year;
-
-	string filename = to_string(month) + "-" + to_string(day) + "-" + to_string(year) + ".txt";
-	ofstream MyFile(filename);
-
+	cout << "Enter the date\n"; //asks for date
+    cin >> date;
+    while (date.find('/') != string::npos)
+    {
+        cout << "Invalid input. You can not use slashes.\n";
+        cout << "Enter date as month-day-year\n";
+        cin >> date;
+    }
+	ofstream MyFile (date + ".txt");
+	
 	do {
 		i = 0;
 		while (i < 16) {
